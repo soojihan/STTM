@@ -456,21 +456,61 @@ public class DMM
 		writer.close();
 	}
 
+	public void writeNWZ()
+			throws IOException
+	{
+		BufferedWriter writer = new BufferedWriter(new FileWriter(folderPath
+				+ expName + ".nwz"));
+		for (int i = 0; i < K; i++) {
+			for (int j = 0; j < V; j++) {
+				writer.write(n_w_z[i][j] + " ");
+			}
+			writer.write("\n");
+		}
+		writer.close();
+	}
+
+	public void writeNZ()
+			throws IOException
+	{
+		BufferedWriter writer = new BufferedWriter(new FileWriter(folderPath
+				+ expName + ".nz"));
+		for (int i = 0; i < K; i++)
+			writer.write(n_z[i] +  "\n");
+		writer.close();
+	}
+
+	public void writeMZ()
+			throws IOException
+	{
+		BufferedWriter writer = new BufferedWriter(new FileWriter(folderPath
+				+ expName + ".mz"));
+		for (int i = 0; i < K; i++)
+			writer.write(m_z[i] +  "\n");
+		writer.close();
+	}
+
+
 	public void write()
-		throws IOException
+			throws IOException
 	{
 		writeParameters();
 		writeTopTopicalWords();
 		writeDocTopicPros();
 		writeTopicAssignments();
 		writeTopicWordPros();
+		writeNWZ();
+		writeNZ();
+		writeMZ();
 	}
 
 	public static void main(String args[])
-		throws Exception
+			throws Exception
 	{
-		DMM dmm = new DMM("dataset/GoogleNews.txt", 200, 0.1,
-			0.1, 50, 10, "GoogleNewsDMM");
+//		DMM dmm = new DMM("dataset/GoogleNews.txt", 200, 0.1,
+//			0.1, 50, 10, "GoogleNewsDMM");
+		DMM dmm = new DMM("dataset/sttm_input/total_sentence_10percent/prec70/sttm_input.txt", 31, 0.1,
+				0.01, 1000, 20, "recompileTest");
 		dmm.inference();
 	}
 }
